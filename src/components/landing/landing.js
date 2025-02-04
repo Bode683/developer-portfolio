@@ -7,6 +7,12 @@ import { headerData } from "../../data/header-data";
 import { socialsData } from "../../data/socials-data";
 import styles from "../../styles/landing.module.css";
 import Link from "../link";
+import dynamic from "next/dynamic";
+
+// Dynamically import Lottie with SSR disabled
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 function Landing() {
   const { theme, drawerOpen } = useContext(ThemeContext);
@@ -134,6 +140,12 @@ function Landing() {
           </div>
         </div>
       </div>
+      {typeof window !== "undefined" && (
+        <Lottie
+          animationData={yourAnimationData}
+          // ... your other Lottie props ...
+        />
+      )}
     </div>
   );
 }
